@@ -1,5 +1,4 @@
 import User from "../models/User";
-import Channel from "../models/Channel";
 import bcrypt from "bcrypt";
 // Signup
 export const getSignup = (req, res) =>
@@ -32,15 +31,12 @@ export const postSignup = async (req, res) => {
       formData,
     });
   }
-  const user = await User.create({
+  await User.create({
     name,
     username,
     email,
     password,
-  });
-  await Channel.create({
-    name: username,
-    owner: user,
+    channel: username,
   });
   return res.status(201).redirect("/login");
 };
@@ -69,10 +65,8 @@ export const postLogin = async (req, res) => {
       formData,
     });
   }
-  const channel = await Channel.findOne({ owner: user });
   req.session.loggedIn = true;
   req.session.loggedInUser = user;
-  req.session.loggedInChannel = channel;
   return res.status(200).redirect("/");
 };
 
@@ -80,6 +74,5 @@ export const postLogin = async (req, res) => {
 export const logout = (req, res) => {
   req.session.loggedIn = false;
   req.session.loggedInUser = null;
-  req.session.loggedInChannel = null;
   return res.status(200).redirect("/");
 };

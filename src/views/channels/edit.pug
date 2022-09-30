@@ -1,0 +1,14 @@
+extends ../base
+
+block content 
+    h1 Edit Channel
+    a(href="") 내 채널 수정
+    form(method="POST" encType="multipart/form-data")
+        input(type="text" name="channel" placeholder="채널 명" value=user.channel)
+        label(for="avatar") 아바타
+        input(type="file" name="avatar" accept="image/*" id="avatar")
+        label(for="banner") 배너
+        input(type="file" name="banner" accept="image/*" id="banner")
+        input(type="text" name="description" placeholder="채널 소개" value=user.description?user.description:"")
+        input(type="submit" value="채널 수정")
+
