@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import MongoStore from "connect-mongo";
 import session from "express-session";
+import { localsMiddleware } from "./middlewares";
 
 // Router
 import globalRouter from "./routers/globalRouter";
@@ -21,7 +22,7 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
-
+app.use(localsMiddleware);
 app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use("/", globalRouter);

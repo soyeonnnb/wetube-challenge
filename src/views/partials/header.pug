@@ -3,9 +3,11 @@ header
         ul 
             li 
                 a(href="/") WeTube
-            li 
-                a(href="/signup") signup
-            li 
-                a(href="/login") login
-            li 
-                a(href="") logout
+            if loggedIn
+                li 
+                    a(href="") logout
+            else
+                li 
+                    a(href="/signup") signup
+                li 
+                    a(href="/login") login
