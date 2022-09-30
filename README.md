@@ -9,14 +9,16 @@ nodeJS, expressJS, mongoDB, pug 등 사용
 
 ###### USER
 
-- [ ] Create
-- [ ] Read
-  - [ ] 내 Profile
-  - [ ] 다른사람 Profile
+- [x] Create
+- [x] Read
+  - [x] 내 Profile
+  - [x] 다른사람 Profile
 - [ ] Update
+  - [x] Profile
+  - [ ] 비밀번호
 - [ ] Delete
-- [ ] Login
-- [ ] Logout
+- [x] Login
+- [x] Logout
 
 ###### VIDEO
 
