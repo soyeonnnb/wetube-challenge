@@ -3,12 +3,11 @@ extends ../base
 block content 
     h3 Hello my Channel
     div 
-        if avatarUrl 
-            span #{avatarUrl}
-        if channelName 
-            span #{channelName}
-        if loggedIn && loggedInUser._id === id  
-            a(href="") 채널 수정
+        if user.avatarUrl 
+            span #{user.avatarUrl}
+        span #{user.channelName}
+        if loggedIn && loggedInUser._id === user.id
+            a(href="/users/edit/profile") 채널 수정
     ul 
         li 
             a(href="featured") 홈

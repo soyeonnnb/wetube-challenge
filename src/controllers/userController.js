@@ -78,12 +78,26 @@ export const logout = (req, res) => {
 };
 
 // see Channel
-export const channelFeature = (req, res) => {
-  return res.render("users/channelFeature", { pageTitle: "channelFeature" });
+export const channelFeature = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).redirect("/");
+  }
+  return res.render("users/channelFeature", {
+    pageTitle: "channelFeature",
+    user,
+  });
 };
-export const channelCommunity = (req, res) => {
+export const channelCommunity = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).redirect("/");
+  }
   return res.render("users/channelCommunity", {
     pageTitle: "channelCommunity",
+    user,
   });
 };
 export const channelAbout = async (req, res) => {
@@ -92,17 +106,25 @@ export const channelAbout = async (req, res) => {
   if (!user) {
     return res.status(404).redirect("/");
   }
-  const { channelName, email, avatarUrl, description, createdAt } = user;
   return res.status(200).render("users/channelAbout", {
     pageTitle: "channelAbout",
-    id,
-    channelName,
-    email,
-    avatarUrl,
-    description,
-    createdAt,
+    user,
   });
 };
-export const channelSearch = (req, res) => {
-  return res.render("users/channelSearch", { pageTitle: "channelSearch" });
+export const channelSearch = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).redirect("/");
+  }
+  return res.render("users/channelSearch", {
+    pageTitle: "channelSearch",
+    user,
+  });
 };
+
+// Edit Profile
+export const getEditProfile = (req, res) => {
+  return res.render("users/editProfile", { pageTitle: "내 채널 수정" });
+};
+export const postEditProfile = (req, res) => {};
