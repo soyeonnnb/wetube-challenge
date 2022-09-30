@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Channel from "../models/Channel";
 import bcrypt from "bcrypt";
 // Signup
 export const getSignup = (req, res) =>
@@ -31,12 +32,15 @@ export const postSignup = async (req, res) => {
       formData,
     });
   }
-  await User.create({
+  const user = await User.create({
     name,
     username,
     email,
     password,
-    channelName: username,
+  });
+  await Channel.create({
+    name: username,
+    owner: user,
   });
   return res.status(201).redirect("/login");
 };
@@ -65,8 +69,10 @@ export const postLogin = async (req, res) => {
       formData,
     });
   }
+  const channel = await Channel.findOne({ owner: user });
   req.session.loggedIn = true;
   req.session.loggedInUser = user;
+  req.session.loggedInChannel = channel;
   return res.status(200).redirect("/");
 };
 
@@ -74,57 +80,6 @@ export const postLogin = async (req, res) => {
 export const logout = (req, res) => {
   req.session.loggedIn = false;
   req.session.loggedInUser = null;
+  req.session.loggedInChannel = null;
   return res.status(200).redirect("/");
 };
-
-// see Channel
-export const channelFeature = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(404).redirect("/");
-  }
-  return res.render("users/channelFeature", {
-    pageTitle: "channelFeature",
-    user,
-  });
-};
-export const channelCommunity = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(404).redirect("/");
-  }
-  return res.render("users/channelCommunity", {
-    pageTitle: "channelCommunity",
-    user,
-  });
-};
-export const channelAbout = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(404).redirect("/");
-  }
-  return res.status(200).render("users/channelAbout", {
-    pageTitle: "channelAbout",
-    user,
-  });
-};
-export const channelSearch = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(404).redirect("/");
-  }
-  return res.render("users/channelSearch", {
-    pageTitle: "channelSearch",
-    user,
-  });
-};
-
-// Edit Profile
-export const getEditProfile = (req, res) => {
-  return res.render("users/editProfile", { pageTitle: "내 채널 수정" });
-};
-export const postEditProfile = (req, res) => {};
