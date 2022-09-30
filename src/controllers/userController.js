@@ -76,3 +76,33 @@ export const logout = (req, res) => {
   req.session.loggedInUser = null;
   return res.status(200).redirect("/");
 };
+
+// see Channel
+export const channelFeature = (req, res) => {
+  return res.render("users/channelFeature", { pageTitle: "channelFeature" });
+};
+export const channelCommunity = (req, res) => {
+  return res.render("users/channelCommunity", {
+    pageTitle: "channelCommunity",
+  });
+};
+export const channelAbout = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).redirect("/");
+  }
+  const { channelName, email, avatarUrl, description, createdAt } = user;
+  return res.status(200).render("users/channelAbout", {
+    pageTitle: "channelAbout",
+    id,
+    channelName,
+    email,
+    avatarUrl,
+    description,
+    createdAt,
+  });
+};
+export const channelSearch = (req, res) => {
+  return res.render("users/channelSearch", { pageTitle: "channelSearch" });
+};

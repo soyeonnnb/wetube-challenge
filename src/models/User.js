@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   channelName: { type: String, required: true },
   avatarUrl: { type: String, required: false },
+  description: { type: String, required: false },
   createdAt: { type: Date, required: true, default: Date.now() },
 });
 

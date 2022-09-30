@@ -1,0 +1,22 @@
+extends ../base
+
+block content 
+    h3 Hello my Channel
+    div 
+        if avatarUrl 
+            span #{avatarUrl}
+        if channelName 
+            span #{channelName}
+        if loggedIn && loggedInUser._id === id  
+            a(href="") 채널 수정
+    ul 
+        li 
+            a(href="featured") 홈
+        li 
+            a(href="community") 커뮤니티
+        li 
+            a(href="about") 정보
+        li 
+            input(type="text" name="channel-search")
+    div 
+        block channelMain
