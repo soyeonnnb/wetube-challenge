@@ -1,6 +1,7 @@
 import "dotenv/config";
-import "./db.js";
-import app from "./server.js";
+import "./db";
+import "./models/User";
+import app from "./server";
 
 const PORT = 4000;
 const handleListening = () =>

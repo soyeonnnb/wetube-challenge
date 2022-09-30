@@ -5,6 +5,7 @@ import session from "express-session";
 
 // Router
 import globalRouter from "./routers/globalRouter";
+import userRouter from "./routers/userRouter";
 
 const app = express();
 const logger = morgan("dev");
@@ -22,6 +23,8 @@ app.use(
 );
 
 app.use(logger);
+app.use(express.urlencoded({ extended: true }));
 app.use("/", globalRouter);
+app.use("/users", userRouter);
 
 export default app;

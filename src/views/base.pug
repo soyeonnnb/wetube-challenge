@@ -1,0 +1,13 @@
+doctype html 
+html 
+    head 
+        if (pageTitle === WeTube)
+            title WeTube 
+        else 
+            title #{pageTitle} - WeTube
+        link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.11/mvp.css")
+    body 
+        include partials/header
+        main 
+            block content
+        footer
