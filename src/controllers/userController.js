@@ -76,3 +76,51 @@ export const logout = (req, res) => {
   req.session.loggedInUser = null;
   return res.status(200).redirect("/");
 };
+
+// Edit Profile
+export const getEditProfile = (req, res) => {
+  return res.render("users/edit", {
+    pageTitle: "내 정보 수정",
+  });
+};
+
+export const postEditProfile = async (req, res) => {
+  const pageTitle = "내 정보 수정";
+  const {
+    session: {
+      loggedInUser,
+      loggedInUser: { _id, avatarUrl, bannerUrl },
+    },
+    body: { username, name, email, channel, description },
+    files: { avatar, banner },
+  } = req;
+  const formData = { username, name, email, channel, description };
+  const existsUsername = await User.findOne({ username });
+  if (existsUsername && existsUsername.username !== loggedInUser.username) {
+    return res.status(404).render("users/edit", {
+      pageTitle,
+      errorMessage: "이미 존재하는 사용자 이름입니다.",
+      formData,
+    });
+  }
+  const existsEmail = await User.findOne({ email });
+  if (existsEmail && existsEmail.email !== loggedInUser.email) {
+    return res.status(404).render("users/edit", {
+      pageTitle,
+      errorMessage: "이미 존재하는 이메일입니다.",
+      formData,
+    });
+  }
+
+  const user = await User.findByIdAndUpdate(_id, {
+    username,
+    name,
+    email,
+    channel,
+    description,
+    avatarUrl: avatar ? avatar[0].path : avatarUrl,
+    bannerUrl: banner ? banner[0].path : bannerUrl,
+  });
+  req.session.loggedInUser = user;
+  return res.status(200).redirect(`/channel/${_id}/featured`);
+};

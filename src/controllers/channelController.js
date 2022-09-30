@@ -45,30 +45,3 @@ export const search = async (req, res) => {
     user,
   });
 };
-
-// Edit Channel
-export const getEditChannel = async (req, res) => {
-  const { _id } = req.session.loggedInUser;
-  const user = await User.findById(_id);
-  return res.render("channels/edit", {
-    pageTitle: "내 채널 수정",
-    user,
-  });
-};
-
-export const postEditChannel = async (req, res) => {
-  const {
-    session: {
-      loggedInUser: { _id, avatarUrl, bannerUrl },
-    },
-    body: { channel, description },
-    files: { avatar, banner },
-  } = req;
-  await User.findByIdAndUpdate(_id, {
-    channel,
-    description,
-    avatarUrl: avatar ? avatar[0].path : avatarUrl,
-    bannerUrl: banner ? banner[0].path : bannerUrl,
-  });
-  return res.status(200).redirect(`${_id}/featured`);
-};

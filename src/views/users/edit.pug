@@ -1,0 +1,17 @@
+extends ../base
+
+block content 
+    h1 edit profile
+    if errorMessage 
+        span=errorMessage
+    form(method="POST" encType="multipart/form-data")
+        input(type="text" name="username" placeholder="사용자 이름" value=formData?formData.username:loggedInUser.username required)
+        input(type="text" name="name" placeholder="이름" value=formData?formData.name:loggedInUser.name required)
+        input(type="text" name="email" placeholder="이메일" value=formData?formData.email:loggedInUser.email required)
+        input(type="text" name="channel" placeholder="채널 명" value=formData?formData.channel:loggedInUser.channel required)
+        label(for="avatar") 아바타
+        input(type="file" name="avatar" accept="image/*" id="avatar")
+        label(for="banner") 배너
+        input(type="file" name="banner" accept="image/*" id="banner")
+        input(type="text" name="description" placeholder="채널 소개" value=formData?formData.description:loggedInUser.description)
+        input(type="submit" value="채널 수정")
