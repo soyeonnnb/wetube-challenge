@@ -1,7 +1,8 @@
 import User from "../models/User";
+import bcrypt from "bcrypt";
 // Signup
 export const getSignup = (req, res) =>
-  res.render("users/signup", { pageTitle: "WeTube 계정 만들기" });
+  res.render("users/signup", { pageTitle: "계정 만들기" });
 
 export const postSignup = async (req, res) => {
   const pageTitle = "계정 만들기";
@@ -37,5 +38,34 @@ export const postSignup = async (req, res) => {
     password,
     channelName: username,
   });
-  return res.status(201).redirect("/");
+  return res.status(201).redirect("/login");
+};
+
+// Login
+export const getLogin = (req, res) =>
+  res.render("users/login", { pageTitle: "로그인" });
+
+export const postLogin = async (req, res) => {
+  const pageTitle = "로그인";
+  const { username, password } = req.body;
+  const formData = { username, password };
+  const user = await User.findOne({ $or: [{ email: username }, { username }] });
+  if (!user) {
+    return res.status(400).render("users/login", {
+      pageTitle,
+      errorMessage: "존재하지 않는 사용자 이름 또는 이메일입니다",
+      formData,
+    });
+  }
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(400).render("users/login", {
+      pageTitle,
+      errorMessage: "비밀번호가 올바르지 않습니다",
+      formData,
+    });
+  }
+  req.session.loggedIn = true;
+  req.session.loggedInUser = user;
+  return res.status(200).redirect("/");
 };
