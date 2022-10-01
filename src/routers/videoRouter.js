@@ -2,6 +2,7 @@ import express from "express";
 import {
   getUploadVideo,
   postUploadVideo,
+  watch,
 } from "../controllers/videoController";
 import { videoUpload } from "../middlewares";
 
@@ -14,5 +15,5 @@ videoRouter
     videoUpload.fields([{ name: "video" }, { name: "thumb" }]),
     postUploadVideo
   );
-
+videoRouter.get("/:id([0-9a-f]{24})/watch", watch);
 export default videoRouter;

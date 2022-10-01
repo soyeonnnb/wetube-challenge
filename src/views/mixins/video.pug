@@ -1,0 +1,6 @@
+mixin video_big(video)
+    a(href=`/videos/${video._id}/watch`)
+        div 
+            p=video.title
+            p=video.owner.channel
+            p=video.createdAt

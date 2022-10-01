@@ -1,13 +1,21 @@
 import User from "../models/User";
 import Video from "../models/Video";
 
-export const home = (req, res) =>
-  res.render("videos/home", { pageTitile: "WeTube" });
+export const home = async (req, res) => {
+  const videos = await Video.find().populate("owner");
+  return res.render("videos/home", { pageTitile: "WeTube", videos });
+};
 
 export const getUploadVideo = (req, res) =>
-  res.render("videos/upload", { pageTitle: "비디오 업로드" });
+  res.render("videos/form", {
+    pageTitle: "비디오 업로드",
+    formBtn: "비디오 업로드",
+  });
 
 export const postUploadVideo = async (req, res) => {
+  const pageTitle = "비디오 업로드";
+  const formBtn = "비디오 업로드";
+
   const {
     files: { video, thumb },
     body: { title, description, hashtags },
@@ -20,7 +28,7 @@ export const postUploadVideo = async (req, res) => {
     req.fileValidationError = "";
     return res
       .status(400)
-      .render("videos/upload", { pageTitle: "비디오 업로드", errorMessage });
+      .render("videos/form", { pageTitle, formBtn, errorMessage });
   }
   try {
     const newVideo = await Video.create({
@@ -40,9 +48,18 @@ export const postUploadVideo = async (req, res) => {
     console.log(e);
     return res.status(400).render("videos/upload", {
       pageTitle: "비디오 업로드",
+      formBtn,
       errorMessage: e,
     });
   }
+};
 
-  return res.end();
+// watch
+export const watch = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findById(id).populate("owner");
+  if (!video) {
+    return res.render("404");
+  }
+  return res.render("videos/watch", { pageTitle: video.title, video });
 };

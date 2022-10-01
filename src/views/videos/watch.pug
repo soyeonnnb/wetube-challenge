@@ -1,0 +1,19 @@
+extends ../base
+
+block content 
+    video(src="/"+video.fileUrl controls)
+    div 
+        div 
+            each hashtag in video.hashtags
+                span ##{hashtag} 
+        span=video.title    
+        div 
+            if video.owner.avatarUrl
+                img(src="/"+video.owner.avatarUrl width="50px")
+            else 
+                span xxx 
+            a(href=`/channel/${video.owner._id}/featured`) video.owner.channel
+        
+        button 🤍
+        span 조회수 #{video.meta.views}회 
+        span=video.createdAt
