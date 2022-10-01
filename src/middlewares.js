@@ -19,44 +19,16 @@ export const channelUpload = multer({
   storage: channelStorage,
 });
 
-export const upload = (req, res, fields) => {
-  const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      if (file.fieldname === "avatar") {
-        cb(null, "uploads/channels/avatars/");
-      } else if (file.fieldname === "banner") {
-        cb(null, "uploads/channels/banners/");
-      }
-    },
-  });
-
-  const upload = multer({
-    storage,
-    limits: {
-      fileSize: 1024 * 1024 * 10,
-    },
-    fileFilter: (req, file, cb) => {
-      checkFileType(file, cb);
-    },
-  }).fields([
-    {
-      name: "avatar",
-      maxCount: 1,
-    },
-    {
-      name: "banner",
-      maxCount: 1,
-    },
-  ]);
-  const checkFileType = (file, cb) => {
-    if (file.mimetype === "image/*") {
-      cb(null, true);
-    } else {
-      cb(null, false);
+const videoStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (file.fieldname === "video") {
+      cb(null, "uploads/videos/files/");
+    } else if (file.fieldname === "thumb") {
+      cb(null, "uploads/videos/thumbs/");
     }
-  };
+  },
+});
 
-  upload(req, res, (err) => {
-    if (err) throw err;
-  });
-};
+export const videoUpload = multer({
+  storage: videoStorage,
+});

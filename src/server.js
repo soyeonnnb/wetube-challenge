@@ -8,6 +8,7 @@ import { localsMiddleware } from "./middlewares";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import channelRouter from "./routers/channelRouter";
+import videoRouter from "./routers/videoRouter";
 
 const app = express();
 const logger = morgan("dev");
@@ -30,5 +31,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/channel", channelRouter);
+app.use("/videos", videoRouter);
 
 export default app;

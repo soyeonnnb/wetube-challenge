@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema({
   bannerUrl: { type: String, required: false },
   description: { type: String, required: false },
   createdAt: { type: Date, required: true, default: Date.now() },
+  videos: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
 });
 
 userSchema.pre("save", async function () {
