@@ -5,7 +5,7 @@ import {
   getEditPassword,
   postEditPassword,
 } from "../controllers/userController";
-import { channelUpload } from "../middlewares";
+import { userUpload } from "../middlewares";
 
 const userRouter = express.Router();
 
@@ -13,7 +13,7 @@ userRouter
   .route("/edit")
   .get(getEditProfile)
   .post(
-    channelUpload.fields([{ name: "avatar" }, { name: "banner" }]),
+    userUpload.fields([{ name: "avatar" }, { name: "banner" }]),
     postEditProfile
   );
 

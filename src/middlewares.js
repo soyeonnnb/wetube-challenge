@@ -5,7 +5,24 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 
-const channelStorage = multer.diskStorage({
+// user fileupload
+const userFileFilter = (req, file, cb) => {
+  const typeArray = file.mimetype.split("/");
+  const fileType = typeArray[1];
+  if (
+    fileType == "jpg" ||
+    fileType == "png" ||
+    fileType == "jpeg" ||
+    fileType == "webp"
+  ) {
+    req.fileValidationError = null;
+    cb(null, true);
+  } else {
+    req.fileValidationError = "jpg, jpeg, png, webp 파일만 업로드 가능합니다.";
+    cb(null, false);
+  }
+};
+const userStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === "avatar") {
       cb(null, "uploads/users/avatars/");
@@ -15,9 +32,47 @@ const channelStorage = multer.diskStorage({
   },
 });
 
-export const channelUpload = multer({
-  storage: channelStorage,
+export const userUpload = multer({
+  storage: userStorage,
+  fileFilter: userFileFilter,
 });
+
+// video fileupload
+const videoFileFilter = (req, file, cb) => {
+  const typeArray = file.mimetype.split("/");
+  const fileType = typeArray[1];
+
+  if (file.fieldname === "video") {
+    if (
+      fileType == "mov" ||
+      fileType == "mp4" ||
+      fileType == "mpeg" ||
+      fileType == "avi" ||
+      fileType == "webm"
+    ) {
+      req.fileValidationError = null;
+      cb(null, true);
+    } else {
+      req.fileValidationError =
+        "mov, mp4, mpeg, avi, webm 파일만 업로드 가능합니다.";
+      cb(null, false);
+    }
+  } else if (file.fieldname === "thumb") {
+    if (
+      fileType == "jpg" ||
+      fileType == "png" ||
+      fileType == "jpeg" ||
+      fileType == "webp"
+    ) {
+      req.fileValidationError = null;
+      cb(null, true);
+    } else {
+      req.fileValidationError =
+        "jpg, jpeg, png, webp 파일만 업로드 가능합니다.";
+      cb(null, false);
+    }
+  }
+};
 
 const videoStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -31,4 +86,5 @@ const videoStorage = multer.diskStorage({
 
 export const videoUpload = multer({
   storage: videoStorage,
+  fileFilter: videoFileFilter,
 });

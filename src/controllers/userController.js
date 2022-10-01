@@ -95,6 +95,15 @@ export const postEditProfile = async (req, res) => {
     files: { avatar, banner },
   } = req;
   const formData = { username, name, email, channel, description };
+  if (req.fileValidationError) {
+    const errorMessage = req.fileValidationError;
+    req.fileValidationError = "";
+    return res.status(404).render("users/edit", {
+      pageTitle,
+      errorMessage,
+      formData,
+    });
+  }
   const existsUsername = await User.findOne({ username });
   if (existsUsername && existsUsername.username !== loggedInUser.username) {
     return res.status(404).render("users/edit", {
