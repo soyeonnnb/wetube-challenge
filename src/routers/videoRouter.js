@@ -3,11 +3,14 @@ import {
   getUploadVideo,
   postUploadVideo,
   watch,
+  getEditVideo,
+  postEditVideo,
 } from "../controllers/videoController";
 import { videoUpload } from "../middlewares";
 
 const videoRouter = express.Router();
 
+videoRouter.get("/:id([0-9a-f]{24})/watch", watch);
 videoRouter
   .route("/upload")
   .get(getUploadVideo)
@@ -15,5 +18,11 @@ videoRouter
     videoUpload.fields([{ name: "video" }, { name: "thumb" }]),
     postUploadVideo
   );
-videoRouter.get("/:id([0-9a-f]{24})/watch", watch);
+videoRouter
+  .route("/:id([0-9a-f]{24})/edit")
+  .get(getEditVideo)
+  .post(
+    videoUpload.fields([{ name: "video" }, { name: "thumb" }]),
+    postEditVideo
+  );
 export default videoRouter;

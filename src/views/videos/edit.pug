@@ -4,11 +4,12 @@ block content
     if errorMessage 
         span=errorMessage
     form(method="POST" enctype="multipart/form-data")
-        input(type="text" name="title" placeholder="제목(필수 항목)" required )
+        input(type="text" name="title" placeholder="제목(필수 항목)" required value=video.title)
         label(for="fileUrl") 비디오
-        input(type="file" name="video" placeholder="video" id="video" required accept="video/*")
+        input(type="file" name="video" placeholder="video" id="video" accept="video/*")
         label(for="thumb") 미리보기 이미지
         input(type="file" name="thumb" placeholder="thumb"  id="thumb" accept="image/*")
         textarea(name="description" placeholder="시청자에게 동영상에 대해 이야기하기")
-        input(type="text" name="hashtags" placeholder="해시태그(띄어쓰기로 구분)")
+            | #{video.description}
+        input(type="text" name="hashtags" placeholder="해시태그(띄어쓰기로 구분)" value=hts)
         input(type="submit" value=formBtn)

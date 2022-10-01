@@ -17,3 +17,8 @@ block content
         button 🤍
         span 조회수 #{video.meta.views}회 
         span=video.createdAt
+        span=video.description
+    
+
+    if loggedIn && video.owner._id == loggedInUser._id
+        a(href=`/videos/${video._id}/edit`) Edit Video 
