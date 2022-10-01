@@ -7,12 +7,16 @@ import {
   postLogin,
   logout,
 } from "../controllers/userController";
-
+import { publicUserOnly, loggedInUserOnly } from "../middlewares";
 const globalRouter = express.Router();
 
 globalRouter.get("/", home);
-globalRouter.get("/logout", logout);
-globalRouter.route("/signup").get(getSignup).post(postSignup);
-globalRouter.route("/login").get(getLogin).post(postLogin);
+globalRouter.get("/logout", loggedInUserOnly, logout);
+globalRouter
+  .route("/signup")
+  .all(publicUserOnly)
+  .get(getSignup)
+  .post(postSignup);
+globalRouter.route("/login").all(publicUserOnly).get(getLogin).post(postLogin);
 
 export default globalRouter;

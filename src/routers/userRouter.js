@@ -5,12 +5,13 @@ import {
   getEditPassword,
   postEditPassword,
 } from "../controllers/userController";
-import { userUpload } from "../middlewares";
+import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
 const userRouter = express.Router();
 
 userRouter
   .route("/edit")
+  .all(loggedInUserOnly)
   .get(getEditProfile)
   .post(
     userUpload.fields([{ name: "avatar" }, { name: "banner" }]),
@@ -19,6 +20,7 @@ userRouter
 
 userRouter
   .route("/change-password")
+  .all(loggedInUserOnly)
   .get(getEditPassword)
   .post(postEditPassword);
 

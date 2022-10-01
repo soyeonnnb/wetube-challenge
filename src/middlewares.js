@@ -5,6 +5,21 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 
+export const publicUserOnly = (req, res, next) => {
+  if (!req.session.loggedIn) {
+    next();
+  } else {
+    return res.status(403).redirect("/");
+  }
+};
+export const loggedInUserOnly = (req, res, next) => {
+  if (req.session.loggedIn) {
+    next();
+  } else {
+    return res.status(403).redirect("/login");
+  }
+};
+
 // user fileupload
 const userFileFilter = (req, file, cb) => {
   const typeArray = file.mimetype.split("/");
