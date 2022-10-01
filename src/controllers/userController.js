@@ -124,3 +124,41 @@ export const postEditProfile = async (req, res) => {
   req.session.loggedInUser = user;
   return res.status(200).redirect(`/channel/${_id}/featured`);
 };
+
+// 비밀번호 변경
+export const getEditPassword = (req, res) =>
+  res.render("users/passwordChange", { pageTitle: "비밀번호 변경" });
+
+export const postEditPassword = async (req, res) => {
+  const pageTitle = "비밀번호 변경";
+  const { _id } = req.session.loggedInUser;
+  const formData = req.body;
+  const { oldPw, newPw, new1Pw } = formData;
+  if (newPw !== new1Pw) {
+    return res.status(404).render("users/passwordChange", {
+      pageTitle,
+      errorMessage: "비밀번호와 비밀번호 확인이 다릅니다",
+      formData,
+    });
+  }
+  const user = await User.findById(_id);
+  const match = await bcrypt.compare(oldPw, user.password);
+  if (!match) {
+    return res.status(404).render("users/passwordChange", {
+      pageTitle,
+      errorMessage: "기존 비밀번호를 틀렸습니다",
+      formData,
+    });
+  }
+  const match1 = await bcrypt.compare(newPw, user.password);
+  if (match1) {
+    return res.status(404).render("users/passwordChange", {
+      pageTitle,
+      errorMessage: "새로운 비밀번호는 기존 비밀번호와 달라야 합니다",
+      formData,
+    });
+  }
+  user.password = newPw;
+  await user.save();
+  return res.status(200).redirect("edit");
+};
