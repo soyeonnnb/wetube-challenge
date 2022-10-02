@@ -26,15 +26,15 @@ nodeJS, expressJS, mongoDB, pug 등 사용
 - [x] Read
 - [x] Update
 - [ ] Delete
-- [ ] Record
+- [x] Record
 
 ###### COMMENT
 
-- [ ] Create
-- [ ] Read
-- [ ] Update
+- [x] Create
+- [x] Read
+- [x] Update
   - [ ] 수정하면 댓글에 수정됨 나오게
-- [ ] Delete
+- [x] Delete
 
 ###### SOCIAL LOGIN
 
