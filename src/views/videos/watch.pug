@@ -1,7 +1,8 @@
 extends ../base
 
 block content 
-    video(src="/"+video.fileUrl controls data-id=video._id)#videoContainer
+    div(data-id=video._id)#videoContainer
+        video(src="/"+video.fileUrl controls)
     div 
         div 
             each hashtag in video.hashtags
@@ -48,3 +49,4 @@ block content
 
 block scripts 
     script(src="/static/js/comment.js")
+    script(src="/static/js/videoPlayer.js")

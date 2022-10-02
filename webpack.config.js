@@ -7,6 +7,7 @@ module.exports = {
     main: BASE_JS + "main.js",
     comment: BASE_JS + "comment.js",
     videoRecord: BASE_JS + "videoRecord.js",
+    videoPlayer: BASE_JS + "videoPlayer.js",
   },
   mode: "development",
   watch: true,
