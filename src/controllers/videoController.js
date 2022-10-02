@@ -1,5 +1,6 @@
 import User from "../models/User";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   const videos = await Video.find().populate("owner");
@@ -13,7 +14,14 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.render("404");
   }
-  return res.render("videos/watch", { pageTitle: video.title, video });
+  const comments = await Comment.find({ video: video._id }).sort({
+    createdAt: -1,
+  });
+  return res.render("videos/watch", {
+    pageTitle: video.title,
+    video,
+    comments,
+  });
 };
 
 // upload video
@@ -42,7 +50,7 @@ export const postUploadVideo = async (req, res) => {
       .render("videos/upload", { pageTitle, formBtn, errorMessage });
   }
   try {
-    const newVideo = await Video.create({
+    await Video.create({
       fileUrl: video[0].path,
       thumbUrl: thumb ? thumb[0].path : null,
       title,
@@ -50,10 +58,6 @@ export const postUploadVideo = async (req, res) => {
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });
-    const user = await User.findById(_id);
-    user.videos.push(newVideo._id);
-    user.save();
-    console.log(newVideo);
     return res.status(201).redirect(`/videos/${newVideo._id}/watch`);
   } catch (e) {
     console.log(e);

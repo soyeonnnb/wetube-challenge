@@ -27,4 +27,5 @@ videoRouter
     videoUpload.fields([{ name: "video" }, { name: "thumb" }]),
     postEditVideo
   );
+
 export default videoRouter;

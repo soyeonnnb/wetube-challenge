@@ -1,7 +1,7 @@
 extends ../base
 
 block content 
-    video(src="/"+video.fileUrl controls)
+    video(src="/"+video.fileUrl controls data-id=video._id)#videoContainer
     div 
         div 
             each hashtag in video.hashtags
@@ -21,4 +21,22 @@ block content
     
 
     if loggedIn && video.owner._id == loggedInUser._id
-        a(href=`/videos/${video._id}/edit`) Edit Video 
+        a(href=`/videos/${video._id}/edit`) Edit Video
+
+    div 
+        if loggedIn
+            form#commentForm
+                input(type="text" name="comment" id="commentFormInput") 
+                input(type="submit" value="댓글")
+    
+    div#commentContainer
+        ul
+            each comment in comments
+                li(data-id=comment.id)
+                    span=comment.text
+            else 
+                span 댓글이 없습니다
+
+
+block scripts 
+    script(src="/static/js/comment.js")
