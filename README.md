@@ -27,6 +27,9 @@ nodeJS, expressJS, mongoDB, pug 등 사용
 - [x] Update
 - [ ] Delete
 - [x] Record
+- [ ] Search
+  - [ ] 전체에서
+  - [ ] 채널 내에서
 
 ###### COMMENT
 
