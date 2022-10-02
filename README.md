@@ -13,18 +13,18 @@ nodeJS, expressJS, mongoDB, pug 등 사용
 - [x] Read
   - [x] 내 Profile
   - [x] 다른사람 Profile
-- [ ] Update
+- [x] Update
   - [x] Profile
-  - [ ] 비밀번호
+  - [x] 비밀번호
 - [ ] Delete
 - [x] Login
 - [x] Logout
 
 ###### VIDEO
 
-- [ ] Create
-- [ ] Read
-- [ ] Update
+- [x] Create
+- [x] Read
+- [x] Update
 - [ ] Delete
 - [ ] Record
 
