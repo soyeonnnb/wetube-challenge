@@ -34,7 +34,14 @@ block content
             each comment in comments
                 li(data-id=comment.id)
                     span=comment.text 
-                    button.comment-delete ❌
+                    button.comment__delete ❌
+                    button.comment__edit-btn ✏
+                    div.comment__edit
+                        textarea
+                            | #{comment.text}
+                        button.comment__edit-submit 수정
+                hr
+
             else 
                 span 댓글이 없습니다
 

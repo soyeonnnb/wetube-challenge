@@ -38,3 +38,24 @@ export const deleteComment = async (req, res) => {
   await Comment.findByIdAndDelete(id);
   return res.sendStatus(200);
 };
+
+// edit comment
+export const editComment = async (req, res) => {
+  const {
+    session: { loggedInUser },
+    body: { text },
+    params: { id },
+  } = req;
+  const comment = await Comment.findById(id);
+  if (!comment) {
+    return res.sendStatus(404);
+  }
+  if (String(comment.owner) !== loggedInUser._id) {
+    return res.sendStatus(404);
+  }
+  await Comment.findByIdAndUpdate(id, {
+    text,
+    updatedAt: Date.now(),
+  });
+  return res.sendStatus(200);
+};

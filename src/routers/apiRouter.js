@@ -1,5 +1,9 @@
 import express from "express";
-import { createComment, deleteComment } from "../controllers/apiController";
+import {
+  createComment,
+  deleteComment,
+  editComment,
+} from "../controllers/apiController";
 import { loggedInUserOnly } from "../middlewares";
 
 const apiRouter = express.Router();
@@ -14,4 +18,11 @@ apiRouter.delete(
   loggedInUserOnly,
   deleteComment
 );
+
+apiRouter.post(
+  "/comments/:id([0-9a-f]{24})/edit",
+  loggedInUserOnly,
+  editComment
+);
+
 export default apiRouter;
