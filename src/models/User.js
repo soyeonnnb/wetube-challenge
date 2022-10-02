@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   avatarUrl: { type: String, required: false },
   bannerUrl: { type: String, required: false },
   description: { type: String, required: false },
-  createdAt: { type: Date, required: true, default: Date.now() },
+  createdAt: { type: Date, required: true, default: Date.now },
 });
 
 userSchema.pre("save", async function () {

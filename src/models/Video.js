@@ -11,7 +11,7 @@ const videoSchema = new mongoose.Schema({
     views: { type: Number, default: 0, required: true },
     likes: { type: Number, default: 0, required: true },
   },
-  createdAt: { type: Date, default: Date.now(), required: true },
+  createdAt: { type: Date, default: Date.now, required: true },
 });
 
 videoSchema.static("formatHashtags", function (hashtags) {

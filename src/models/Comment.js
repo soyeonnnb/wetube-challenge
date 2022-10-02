@@ -12,8 +12,8 @@ const commentSchema = new mongoose.Schema({
     required: true,
     ref: "Video",
   },
-  createdAt: { type: Date, required: true, default: Date.now() },
-  updatedAt: { type: Date, required: true, default: Date.now() },
+  createdAt: { type: Date, required: true, default: Date.now },
+  updatedAt: { type: Date, required: true, default: Date.now },
 });
 
 const Comment = mongoose.model("Comment", commentSchema);
