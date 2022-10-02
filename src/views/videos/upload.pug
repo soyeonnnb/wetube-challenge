@@ -3,6 +3,9 @@ extends ../base
 block content 
     if errorMessage 
         span=errorMessage
+    div#videoLive
+        video(src="" width="500px" id="videoLive__video")
+        button#videoLive__Btn 녹화 시작
     form(method="POST" enctype="multipart/form-data")
         input(type="text" name="title" placeholder="제목(필수 항목)" required)
         label(for="fileUrl") 비디오
@@ -12,3 +15,6 @@ block content
         textarea(name="description" placeholder="시청자에게 동영상에 대해 이야기하기")
         input(type="text" name="hashtags" placeholder="해시태그(띄어쓰기로 구분)")
         input(type="submit" value=formBtn)
+
+block scripts 
+    script(src="/static/js/videoRecord.js")

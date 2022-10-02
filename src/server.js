@@ -34,6 +34,11 @@ app.use(express.json());
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.use("/channel", channelRouter);
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "credentialless");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 app.use("/videos", videoRouter);
 app.use("/api", apiRouter);
 
