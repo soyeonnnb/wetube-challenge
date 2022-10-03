@@ -4,6 +4,8 @@ import {
   postEditProfile,
   getEditPassword,
   postEditPassword,
+  githubLoginStart,
+  githubLoginFinish,
 } from "../controllers/userController";
 import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
@@ -24,4 +26,6 @@ userRouter
   .get(getEditPassword)
   .post(postEditPassword);
 
+userRouter.get("/github/start", publicUserOnly, githubLoginStart);
+userRouter.get("/github/finish", publicUserOnly, githubLoginFinish);
 export default userRouter;
