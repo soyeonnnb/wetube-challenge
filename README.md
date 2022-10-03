@@ -42,7 +42,7 @@ nodeJS, expressJS, mongoDB, pug 등 사용
 
 ###### SOCIAL LOGIN
 
-- [ ] Github
+- [x] Github
 - [ ] Kakao
 - [ ] Naver
 
