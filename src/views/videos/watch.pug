@@ -1,4 +1,5 @@
 extends ../base
+include ../mixins/comment
 
 block content 
     div(data-id=video._id)#videoContainer
@@ -38,15 +39,7 @@ block content
     div#commentContainer
         ul
             each comment in comments
-                li(data-id=comment.id)
-                    span=comment.text 
-                    button.comment__delete ❌
-                    button.comment__edit-btn ✏
-                    div.comment__edit
-                        textarea
-                            | #{comment.text}
-                        button.comment__edit-submit 수정
-                hr
+                +comment_watch(comment)
 
             else 
                 span 댓글이 없습니다

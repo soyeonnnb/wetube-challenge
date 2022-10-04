@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Comment from "../models/Comment";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
 
@@ -248,4 +249,13 @@ export const githubLoginFinish = async (req, res) => {
     return res.redirect("/");
   }
   return res.redirect("/");
+};
+
+// comment view
+export const commentView = async (req, res) => {
+  const { loggedInUser } = req.session;
+  const comments = await Comment.find({ user: loggedInUser._id }).populate(
+    "video"
+  );
+  return res.render("users/comments", { pageTitle: "My Comments", comments });
 };

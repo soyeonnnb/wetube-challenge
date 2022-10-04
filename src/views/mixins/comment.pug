@@ -1,0 +1,25 @@
+mixin comment_watch(comment)
+    li(data-id=comment.id)
+        span=comment.text 
+        button.comment__delete ❌
+        button.comment__edit-btn ✏
+        div.comment__edit
+            textarea
+                | #{comment.text}
+            button.comment__edit-submit 수정
+        hr
+
+mixin comment_view(comment)
+    li(data-id=comment._id)
+        if (comment.video)
+            a(href=`/videos/${comment.video._id}/watch`) #{comment.video.title}
+        else 
+            span 삭제된 동영상입니다. 
+        span=comment.text
+        if (comment.video)
+            div.comment__edit
+                textarea
+                    | #{comment.text}
+                button.comment__edit-submit 수정
+        button.comment__delete ❌
+        hr

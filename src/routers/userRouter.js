@@ -6,6 +6,7 @@ import {
   postEditPassword,
   githubLoginStart,
   githubLoginFinish,
+  commentView,
 } from "../controllers/userController";
 import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
@@ -28,4 +29,5 @@ userRouter
 
 userRouter.get("/github/start", publicUserOnly, githubLoginStart);
 userRouter.get("/github/finish", publicUserOnly, githubLoginFinish);
+userRouter.get("/comments", loggedInUserOnly, commentView);
 export default userRouter;

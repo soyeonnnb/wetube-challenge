@@ -1,0 +1,15 @@
+extends ../base
+include ../mixins/comment
+
+block content 
+    h1 Comment view 
+    div#commentContainer
+        ul
+            each comment in comments
+                +comment_view(comment)
+
+            else 
+                span 작성한 댓글이 없습니다.
+
+block scripts
+    script(src="/static/js/comment.js")

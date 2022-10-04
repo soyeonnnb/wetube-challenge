@@ -6,6 +6,7 @@ import {
   getEditVideo,
   postEditVideo,
   searchVideos,
+  deleteVideo,
 } from "../controllers/videoController";
 import { videoUpload, loggedInUserOnly, publicUserOnly } from "../middlewares";
 
@@ -28,5 +29,8 @@ videoRouter
     videoUpload.fields([{ name: "video" }, { name: "thumb" }]),
     postEditVideo
   );
+
+videoRouter.get("/:id([0-9a-f]{24})/delete", loggedInUserOnly, deleteVideo);
+
 videoRouter.get("/search", searchVideos);
 export default videoRouter;

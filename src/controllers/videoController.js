@@ -160,3 +160,21 @@ export const searchVideos = async (req, res) => {
   }
   return res.render("videos/search", { pageTitle: "Search", videos, channels });
 };
+
+// delete video
+export const deleteVideo = async (req, res) => {
+  const {
+    session: { loggedInUser },
+    params: { id },
+  } = req;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.status(404).redirect("/");
+  }
+  if (String(video.owner._id) !== String(loggedInUser._id)) {
+    return res.status(403).redirect("watch");
+  }
+  await Like.deleteMany({ video: id });
+  await Video.findByIdAndDelete(id);
+  return res.status(200).redirect("/");
+};
