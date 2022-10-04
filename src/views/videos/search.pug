@@ -1,0 +1,10 @@
+extends ../base
+include ../mixins/video
+
+block content 
+    h1 Search
+    each channel in channels 
+        a(href=`/channel/${channel._id}/featured`)
+            span=channel.channel
+    each video in videos
+        +video_big(video)

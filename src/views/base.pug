@@ -9,6 +9,9 @@ html
     body 
         include partials/header
         main 
+            form(action="/videos/search" method="GET")
+                input(type="text" placeholder="검색어를 입력해주세요" name="keyword")
+                button(type="submit") 검색
             block content
         footer
         block scripts

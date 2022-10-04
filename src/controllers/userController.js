@@ -228,6 +228,11 @@ export const githubLoginFinish = async (req, res) => {
     }
     let user = await User.findOne({ email: emailObj.email });
     if (user) {
+      if (user.socialLogin) {
+        req.session.loggedIn = true;
+        req.session.loggedInUser = user;
+        return res.redirect("/");
+      }
       return res.redirect("/login");
     }
     user = await User.create({

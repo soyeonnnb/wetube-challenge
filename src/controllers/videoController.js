@@ -4,7 +4,7 @@ import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
   const videos = await Video.find().populate("owner");
-  return res.render("videos/home", { pageTitile: "WeTube", videos });
+  return res.render("videos/home", { pageTitle: "WeTube", videos });
 };
 
 // watch
@@ -50,7 +50,7 @@ export const postUploadVideo = async (req, res) => {
       .render("videos/upload", { pageTitle, formBtn, errorMessage });
   }
   try {
-    await Video.create({
+    const newVideo = await Video.create({
       fileUrl: video[0].path,
       thumbUrl: thumb ? thumb[0].path : null,
       title,
@@ -132,4 +132,21 @@ export const registerView = async (req, res) => {
   video.meta.views = video.meta.views + 1;
   await video.save();
   return res.sendStatus(200);
+};
+
+// search
+export const searchVideos = async (req, res) => {
+  const { keyword } = req.query;
+  let videos = [];
+  let channels = [];
+  if (keyword) {
+    videos = await Video.find({ title: { $regex: new RegExp(keyword, "i") } });
+    channels = await User.find({
+      channel: { $regex: new RegExp(keyword, "i") },
+    });
+  }
+  if (channels.length > 3) {
+    channels = channels.slice(3);
+  }
+  return res.render("videos/search", { pageTitle: "Search", videos, channels });
 };
