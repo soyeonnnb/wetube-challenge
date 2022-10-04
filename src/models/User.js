@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String },
-  socialLogin: { type: String, enum: ["GITHUB"] },
+  socialLogin: { type: String, enum: ["GITHUB", "KAKAO"] },
   channel: { type: String, required: true },
   avatarUrl: { type: String, required: false },
   bannerUrl: { type: String, required: false },

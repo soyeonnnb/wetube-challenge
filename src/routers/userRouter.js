@@ -8,6 +8,8 @@ import {
   githubLoginFinish,
   commentView,
   deleteUser,
+  kakaoLoginStart,
+  kakaoLoginFinish,
 } from "../controllers/userController";
 import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
@@ -30,7 +32,11 @@ userRouter
 
 userRouter.get("/delete", loggedInUserOnly, deleteUser);
 
+userRouter.get("/comments", loggedInUserOnly, commentView);
+
 userRouter.get("/github/start", publicUserOnly, githubLoginStart);
 userRouter.get("/github/finish", publicUserOnly, githubLoginFinish);
-userRouter.get("/comments", loggedInUserOnly, commentView);
+
+userRouter.get("/kakao/start", publicUserOnly, kakaoLoginStart);
+userRouter.get("/kakao/finish", publicUserOnly, kakaoLoginFinish);
 export default userRouter;
