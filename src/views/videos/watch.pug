@@ -15,7 +15,12 @@ block content
                 span xxx 
             a(href=`/channel/${video.owner._id}/featured`) video.owner.channel
         
-        button 🤍
+        button#likeBtn(class=like?"like":"dislike")
+            if like 
+                | 💖
+            else 
+                | 🤍
+
         span 조회수 #{video.meta.views}회 
         span=video.createdAt
         span=video.description
@@ -50,3 +55,4 @@ block content
 block scripts 
     script(src="/static/js/comment.js")
     script(src="/static/js/videoPlayer.js")
+    script(src="/static/js/like.js")

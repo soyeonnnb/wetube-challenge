@@ -2,6 +2,7 @@
 
 import Comment from "../models/Comment";
 import Video from "../models/Video";
+import Like from "../models/Like";
 
 // create comment
 export const createComment = async (req, res) => {
@@ -57,5 +58,37 @@ export const editComment = async (req, res) => {
     text,
     updatedAt: Date.now(),
   });
+  return res.sendStatus(200);
+};
+
+// LIKE
+// create like
+export const createLike = async (req, res) => {
+  const {
+    session: { loggedInUser },
+    params: { id },
+  } = req;
+  const like = await Like.findOne({ user: loggedInUser._id, video: id });
+  if (like) {
+    return res.sendStatus(404);
+  }
+  await Like.create({
+    user: loggedInUser._id,
+    video: id,
+  });
+  return res.sendStatus(201);
+};
+
+// delete like
+export const deleteLike = async (req, res) => {
+  const {
+    session: { loggedInUser },
+    params: { id },
+  } = req;
+  const like = await Like.findOne({ user: loggedInUser._id, video: id });
+  if (!like) {
+    return res.sendStatus(404);
+  }
+  await Like.findByIdAndDelete(like._id);
   return res.sendStatus(200);
 };

@@ -1,6 +1,7 @@
 import User from "../models/User";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
+import Like from "../models/Like";
 
 export const home = async (req, res) => {
   const videos = await Video.find().populate("owner");
@@ -10,6 +11,7 @@ export const home = async (req, res) => {
 // watch
 export const watch = async (req, res) => {
   const { id } = req.params;
+  let like;
   const video = await Video.findById(id).populate("owner");
   if (!video) {
     return res.render("404");
@@ -17,10 +19,18 @@ export const watch = async (req, res) => {
   const comments = await Comment.find({ video: video._id }).sort({
     createdAt: -1,
   });
+  if (req.session.loggedIn) {
+    like = await Like.findOne({
+      user: req.session.loggedInUser._id,
+      video: id,
+    });
+  }
+
   return res.render("videos/watch", {
     pageTitle: video.title,
     video,
     comments,
+    like,
   });
 };
 
