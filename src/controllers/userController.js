@@ -1,5 +1,7 @@
 import User from "../models/User";
+import Video from "../models/Video";
 import Comment from "../models/Comment";
+import Like from "../models/Like";
 import bcrypt from "bcrypt";
 import fetch from "node-fetch";
 
@@ -249,6 +251,18 @@ export const githubLoginFinish = async (req, res) => {
     return res.redirect("/");
   }
   return res.redirect("/");
+};
+
+// user delete
+export const deleteUser = async (req, res) => {
+  const { _id } = req.session.loggedInUser;
+  await User.findByIdAndDelete(_id);
+  await Video.deleteMany({ owner: _id });
+  await Comment.deleteMany({ owner: _id });
+  await Like.deleteMany({ owner: _id });
+  req.session.loggedIn = false;
+  req.session.loggedInUser = null;
+  return res.status(200).redirect("/");
 };
 
 // comment view

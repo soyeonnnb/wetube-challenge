@@ -70,7 +70,6 @@ export const postUploadVideo = async (req, res) => {
     });
     return res.status(201).redirect(`/videos/${newVideo._id}/watch`);
   } catch (e) {
-    console.log(e);
     return res.status(400).render("videos/upload", {
       pageTitle: "비디오 업로드",
       formBtn,

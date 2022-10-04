@@ -7,6 +7,7 @@ import {
   githubLoginStart,
   githubLoginFinish,
   commentView,
+  deleteUser,
 } from "../controllers/userController";
 import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
@@ -26,6 +27,8 @@ userRouter
   .all(loggedInUserOnly)
   .get(getEditPassword)
   .post(postEditPassword);
+
+userRouter.get("/delete", loggedInUserOnly, deleteUser);
 
 userRouter.get("/github/start", publicUserOnly, githubLoginStart);
 userRouter.get("/github/finish", publicUserOnly, githubLoginFinish);

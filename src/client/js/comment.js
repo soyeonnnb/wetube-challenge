@@ -48,7 +48,6 @@ const handleCommentDelete = async (event) => {
   if (response.status === 200) {
     li.remove();
   }
-  console.log(e);
 };
 
 const handleCommentEdit = async (event) => {
