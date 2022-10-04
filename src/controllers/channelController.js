@@ -1,4 +1,5 @@
 import User from "../models/User";
+import Video from "../models/Video";
 
 // see
 export const feature = async (req, res) => {
@@ -7,9 +8,11 @@ export const feature = async (req, res) => {
   if (!user) {
     return res.status(404).redirect("/");
   }
+  const videos = await Video.find({ owner: id });
   return res.render("channels/feature", {
     pageTitle: "channelFeature",
     user,
+    videos,
   });
 };
 export const community = async (req, res) => {
@@ -34,14 +37,23 @@ export const about = async (req, res) => {
     user,
   });
 };
+
 export const search = async (req, res) => {
-  const { id } = req.params;
+  const {
+    params: { id },
+    query: { keyword },
+  } = req;
   const user = await User.findById(id);
   if (!user) {
     return res.status(404).redirect("/");
   }
+  const videos = await Video.find({
+    title: { $regex: new RegExp(keyword, "i") },
+    owner: id,
+  });
   return res.render("channels/search", {
     pageTitle: "channelSearch",
     user,
+    videos,
   });
 };

@@ -16,6 +16,8 @@ block content
         li 
             a(href="about") 정보
         li 
-            input(type="text" name="channel-search")
+            form(action=`/channel/${user._id}/search`)
+                input(type="text" name="keyword" required)
+                button 검색
     div 
         block channelMain

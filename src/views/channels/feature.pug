@@ -1,4 +1,7 @@
 extends baseC
+include ../mixins/video
 
 block channelMain
     h1 Home
+    each video in videos 
+        +video_big(video)
