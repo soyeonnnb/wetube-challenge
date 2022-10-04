@@ -8,5 +8,10 @@ block content
         input(type="password" name="password" placeholder="비밀번호" required value=formData?formData.password:"")
         input(type="submit" value="로그인")
     
-    a(href="/users/github/start") github
-    a(href="/users/kakao/start") kakao
+    ul
+        li
+            a(href="/users/github/start") github
+        li
+            a(href="/users/kakao/start") kakao
+        li
+            a(href="/users/naver/start") naver

@@ -4,13 +4,17 @@ import {
   postEditProfile,
   getEditPassword,
   postEditPassword,
-  githubLoginStart,
-  githubLoginFinish,
   commentView,
   deleteUser,
+} from "../controllers/userController";
+import {
+  githubLoginStart,
+  githubLoginFinish,
   kakaoLoginStart,
   kakaoLoginFinish,
-} from "../controllers/userController";
+  naverLoginStart,
+  naverLoginFinish,
+} from "../controllers/socialLoginController";
 import { userUpload, publicUserOnly, loggedInUserOnly } from "../middlewares";
 
 const userRouter = express.Router();
@@ -39,4 +43,7 @@ userRouter.get("/github/finish", publicUserOnly, githubLoginFinish);
 
 userRouter.get("/kakao/start", publicUserOnly, kakaoLoginStart);
 userRouter.get("/kakao/finish", publicUserOnly, kakaoLoginFinish);
+
+userRouter.get("/naver/start", publicUserOnly, naverLoginStart);
+userRouter.get("/naver/finish", publicUserOnly, naverLoginFinish);
 export default userRouter;
