@@ -1,19 +1,25 @@
 header
     nav 
-        ul 
-            li 
-                a(href="/") WeTube
-            if loggedIn
-                li 
-                    a(href="/logout") logout
-                li 
+        div
+            a(href="/") 
+                i.fa-brands.fa-youtube.fa-xl.red
+                |  WeTube
+        div   
+            form(action="/videos/search" method="GET")
+                input(type="text" placeholder="검색" name="keyword" required)
+                button(type="submit")
+                    i.fa-solid.fa-magnifying-glass
+        if loggedIn
+            div.toggle-box
+                button.toggle-box__btn
+                    i.fa-solid.fa-user
+                div.toggle-box__elems.hidden
                     a(href=`/channel/${loggedInUser._id}/featured`) 내 채널
-                li 
                     a(href=`/videos/upload`) 비디오 업로드
-                li 
                     a(href=`/users/comments`) 댓글 관리
-            else
-                li 
-                    a(href="/signup") signup
-                li 
-                    a(href="/login") login
+                    a(href="/logout") 로그아웃
+        else    
+            div
+                a(href="/login").login
+                    i.fa-regular.fa-user
+                    span  로그인

@@ -1,0 +1,263 @@
+/*!**********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/client/scss/styles.scss ***!
+  \**********************************************************************************************************************/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 0 20px;
+  background-color: white;
+}
+header nav div:first-child {
+  font-weight: 700;
+}
+header nav div:nth-child(2) {
+  margin: 0 20px;
+}
+header nav div a {
+  white-space: nowrap;
+}
+header nav div a.login {
+  display: table-cell;
+  border: 2px solid #35a3e8;
+  border-radius: 2px;
+  width: 80px;
+  height: 36px;
+  text-align: center;
+  font-size: 15px;
+  vertical-align: middle;
+  padding: 0 10px;
+}
+header nav div a.login i {
+  border: 2px solid #35a3e8;
+  border-radius: 9999px;
+  padding: 5px;
+  height: 14px;
+  width: 14px;
+}
+header nav div a.login:active {
+  background-color: #e7e7e7;
+}
+header nav div.toggle-box button {
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  border: none;
+  background-color: #a8efb4;
+  cursor: pointer;
+}
+header nav div.toggle-box button:hover {
+  background-color: #87ea98;
+}
+header nav form {
+  display: flex;
+  align-content: center;
+  border-radius: 2px;
+}
+header nav form input {
+  min-width: 150px;
+  width: 500px;
+  height: 40px;
+  padding: 0 8px;
+  border: 1px solid #e7e7e7;
+}
+header nav form input:focus {
+  outline: none;
+  border-color: #35a3e8;
+}
+header nav form button {
+  height: 42px;
+  width: 56px;
+  font-size: 16px;
+  border-radius: 0px;
+  border: 1px solid #e7e7e7;
+}
+header nav form button:hover {
+  background-color: #e7e7e7;
+}
+header nav form button:active {
+  background-color: #cdcdcd;
+  border-color: #cdcdcd;
+}
+
+.toggle-box {
+  position: relative;
+}
+
+.toggle-box__elems {
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  background-color: white;
+  box-shadow: 0 2px 10px #e7e7e7;
+}
+.toggle-box__elems a {
+  display: inline-block;
+  padding: 15px 20px;
+}
+.toggle-box__elems a:last-child {
+  border-top: 1px solid #cdcdcd;
+}
+.toggle-box__elems a:hover {
+  background-color: #f9f9f9;
+}
+.toggle-box__elems a:active {
+  background-color: #e7e7e7;
+}
+
+nav .toggle-box__elems {
+  width: 200px;
+}
+nav .toggle-box__elems a {
+  width: 160px;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+.red {
+  color: #fd0005;
+}
+
+.hidden {
+  display: none;
+}

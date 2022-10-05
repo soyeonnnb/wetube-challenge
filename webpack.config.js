@@ -1,3 +1,4 @@
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 
 const BASE_JS = "./src/client/js/";
@@ -12,6 +13,11 @@ module.exports = {
   },
   mode: "development",
   watch: true,
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "css/styles.css",
+    }),
+  ],
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
@@ -27,6 +33,10 @@ module.exports = {
             presets: [["@babel/preset-env", { targets: "defaults" }]],
           },
         },
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },

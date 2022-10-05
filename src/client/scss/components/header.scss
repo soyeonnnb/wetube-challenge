@@ -1,0 +1,80 @@
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  border-bottom: 1px solid $gray;
+  padding: 0 20px;
+  background-color: white;
+  div:first-child {
+    font-weight: 700;
+  }
+  div:nth-child(2) {
+    margin: 0 20px;
+  }
+  div a {
+    white-space: nowrap;
+    &.login {
+      display: table-cell;
+      border: 2px solid $blue;
+      border-radius: 2px;
+      width: 80px;
+      height: 36px;
+      text-align: center;
+      font-size: 15px;
+      vertical-align: middle;
+      padding: 0 10px;
+      i {
+        border: 2px solid $blue;
+        border-radius: 9999px;
+        padding: 5px;
+        height: 14px;
+        width: 14px;
+      }
+      &:active {
+        background-color: $gray;
+      }
+    }
+  }
+  div.toggle-box button {
+    width: 30px;
+    height: 30px;
+    border-radius: 9999px;
+    border: none;
+    background-color: #a8efb4;
+    cursor: pointer;
+    &:hover {
+      background-color: #87ea98;
+    }
+  }
+  form {
+    display: flex;
+    align-content: center;
+    border-radius: 2px;
+    input {
+      min-width: 150px;
+      width: 500px;
+      height: 40px;
+      padding: 0 8px;
+      border: 1px solid $gray;
+      &:focus {
+        outline: none;
+        border-color: $blue;
+      }
+    }
+    button {
+      height: 42px;
+      width: 56px;
+      font-size: 16px;
+      border-radius: 0px;
+      border: 1px solid $gray;
+      &:hover {
+        background-color: $gray;
+      }
+      &:active {
+        background-color: $dark-gray;
+        border-color: $dark-gray;
+      }
+    }
+  }
+}

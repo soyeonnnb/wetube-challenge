@@ -1,0 +1,16 @@
+@import "./config/reset.scss";
+@import "./config/variables.scss";
+
+// Components
+@import "./components/header.scss";
+@import "./components/toggle.scss";
+
+body {
+  background-color: $light-gray;
+}
+.red {
+  color: $red;
+}
+.hidden {
+  display: none;
+}

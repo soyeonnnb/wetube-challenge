@@ -131,8 +131,8 @@ export const postEditProfile = async (req, res) => {
     email,
     channel,
     description,
-    avatarUrl: avatar ? "/" + avatar[0].path : avatarUrl,
-    bannerUrl: banner ? "/" + banner[0].path : bannerUrl,
+    avatarUrl: avatar ? avatar[0].path : avatarUrl,
+    bannerUrl: banner ? banner[0].path : bannerUrl,
   });
   req.session.loggedInUser = user;
   return res.status(200).redirect(`/channel/${_id}/featured`);

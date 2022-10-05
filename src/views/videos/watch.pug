@@ -14,7 +14,7 @@ block content
                 img(src="/"+video.owner.avatarUrl width="50px")
             else 
                 span xxx 
-            a(href=`/channel/${video.owner._id}/featured`) video.owner.channel
+            a(href=`/channel/${video.owner._id}/featured`) #{video.owner.channel}
         
         button#likeBtn(class=like?"like":"dislike")
             if like 
