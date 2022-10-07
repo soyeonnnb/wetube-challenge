@@ -8,7 +8,7 @@ export const feature = async (req, res) => {
   if (!user) {
     return res.status(404).redirect("/");
   }
-  const videos = await Video.find({ owner: id });
+  const videos = await Video.find({ owner: id }).populate("owner");
   return res.render("channels/feature", {
     pageTitle: "channelFeature",
     user,
@@ -50,7 +50,7 @@ export const search = async (req, res) => {
   const videos = await Video.find({
     title: { $regex: new RegExp(keyword, "i") },
     owner: id,
-  });
+  }).populate("owner");
   return res.render("channels/search", {
     pageTitle: "channelSearch",
     user,

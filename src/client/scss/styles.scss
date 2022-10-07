@@ -2,15 +2,13 @@
 @import "./config/variables.scss";
 
 // Components
+@import "./components/main.scss";
 @import "./components/header.scss";
 @import "./components/toggle.scss";
+@import "./components/video.scss";
+@import "./components/form.scss";
 
-body {
-  background-color: $light-gray;
-}
-.red {
-  color: $red;
-}
-.hidden {
-  display: none;
-}
+// Screens
+@import "./screens/home.scss";
+@import "./screens/channelBase.scss";
+@import "./screens/upload.scss";

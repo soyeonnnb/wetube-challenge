@@ -1,0 +1,14 @@
+body {
+  background-color: $light-gray;
+}
+main {
+  max-width: 1400px;
+  padding: 0 30px;
+  margin-top: 24px;
+}
+.red {
+  color: $red;
+}
+.hidden {
+  display: none;
+}

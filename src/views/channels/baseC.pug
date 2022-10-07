@@ -1,23 +1,27 @@
 extends ../base
 
-block content 
-    h3 Hello my Channel
-    div 
-        if user.avatarUrl 
-            img(src="/"+user.avatarUrl width="250px")
-        span #{user.channel}
-        if loggedIn && loggedInUser._id === user.id
-            a(href="/users/edit") 내 정보 수정
-    ul 
-        li 
-            a(href="featured") 홈
-        li 
-            a(href="community") 커뮤니티
-        li 
-            a(href="about") 정보
-        li 
-            form(action=`/channel/${user._id}/search`)
-                input(type="text" name="keyword" required)
-                button 검색
-    div 
-        block channelMain
+block channelBase
+    if user.bannerUrl 
+        img(src="/"+user.bannerUrl).banner
+    div.channel-profile
+        div
+            div
+                if user.avatarUrl 
+                    img(src="/"+user.avatarUrl width="250px").channel-avatar
+                span #{user.channel}
+            if loggedIn && loggedInUser._id === user.id
+                a(href="/users/edit").channel-edit 
+                    span 내 정보 수정
+    ul.channel-list 
+        div
+            li 
+                a(href="featured") 홈
+            li 
+                a(href="community") 커뮤니티
+            li 
+                a(href="about") 정보
+            li 
+                button#channelSearchBtn
+                    i.fa-solid.fa-magnifying-glass
+                form(action=`/channel/${user._id}/search`).channel-search-form.hidden
+                    input(type="text" name="keyword" required)

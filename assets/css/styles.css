@@ -137,6 +137,29 @@ a {
   color: black;
 }
 
+input[type=text],
+textarea {
+  outline: none;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+main {
+  max-width: 1400px;
+  padding: 0 30px;
+  margin-top: 24px;
+}
+
+.red {
+  color: #fd0005;
+}
+
+.hidden {
+  display: none;
+}
+
 header nav {
   display: flex;
   justify-content: space-between;
@@ -250,14 +273,299 @@ nav .toggle-box__elems a {
   width: 160px;
 }
 
-body {
-  background-color: #f9f9f9;
+.video-box {
+  margin: 10px;
+  width: 300px;
+  padding-bottom: 15px;
+}
+.video-box video {
+  width: 300px;
+  height: 160px;
+  background-color: black;
+}
+.video-box .video-data {
+  display: flex;
+  margin-top: 10px;
+}
+.video-box .video-data--channel {
+  padding-left: 10px;
+  margin-right: 10px;
+}
+.video-box .video-data--channel div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background-color: #a8efb4;
+}
+.video-box .video-data--channel img {
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+}
+.video-box .video-data--data span {
+  display: inline-block;
+  width: 100%;
+}
+.video-box .video-data--data span:first-child {
+  margin-bottom: 5px;
+}
+.video-box .video-data--data span:nth-child(2),
+.video-box .video-data--data span:last-child {
+  font-size: 14px;
+  color: #3f3f3f;
+}
+.video-box .video-data--data span:last-child {
+  margin-top: 5px;
+}
+.video-box:hover {
+  box-shadow: 0px 0px 10px #525252;
 }
 
-.red {
-  color: #fd0005;
+.form-template {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.form-template form {
+  border: 2px solid #cdcdcd;
+  border-radius: 2px;
+  background-color: white;
+  width: 100%;
+  max-width: 448px;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 80px;
+  padding: 40px 20px;
+}
+.form-template form h1 {
+  font-size: 23px;
+  margin-bottom: 30px;
+}
+.form-template form.short {
+  height: 600px;
+}
+.form-template form input {
+  width: 300px;
+  height: 36px;
+  padding: 7px 33px;
+  font-size: 15px;
+}
+.form-template form input[type=submit] {
+  width: 366px;
+  height: 50px;
+  background-color: #185dd4;
+  border: none;
+  color: white;
+}
+.form-template form input[type=submit]:hover {
+  background-color: #286de4;
+  box-shadow: 0px 0px 3px #286de4;
+}
+.form-template form input:not([type=submit]) {
+  margin-bottom: 27px;
+}
+.form-template form textarea {
+  width: 300px;
+  padding: 7px 33px;
+  resize: vertical;
+  margin-bottom: 27px;
+  min-height: 36px;
+}
+.form-template form hr {
+  width: 80%;
+  border: 0;
+  background-color: #cdcdcd;
+  height: 1px;
+  margin: 30px 0;
+}
+.form-template form .social-login li {
+  width: 366px;
+  height: 50px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+.form-template form .social-login li:not(:last-child) {
+  margin-bottom: 20px;
+}
+.form-template form .social-login li i {
+  position: absolute;
+  left: 13px;
+  font-size: 20px;
+  color: white;
+}
+.form-template form .social-login li.github {
+  background-color: #2f2f2f;
+}
+.form-template form .social-login li.github a {
+  color: white;
+}
+.form-template form .social-login li.kakao {
+  background-color: #f5b34f;
+}
+.form-template form .social-login li.kakao i {
+  color: #3c1e21;
+}
+.form-template form .social-login li.naver {
+  background-color: #5bbc39;
+}
+.form-template form .ment {
+  margin-top: 20px;
+}
+.form-template form .ment a {
+  color: #35a3e8;
+}
+.form-template form .form-1row-2achor {
+  display: flex;
+  justify-content: space-around;
+  width: 366px;
+  height: 50px;
+}
+.form-template form .form-1row-2achor a {
+  width: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.form-template form .form-1row-2achor a:first-child {
+  background-color: #35a3e8;
+}
+.form-template form .form-1row-2achor a:last-child {
+  background-color: #cc0001;
 }
 
-.hidden {
-  display: none;
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, 320px);
+  justify-content: center;
+}
+
+.banner {
+  width: 100%;
+  max-height: 320px;
+}
+
+.channel-profile {
+  height: 100px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.channel-profile div {
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+.channel-profile div div {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+.channel-profile div .channel-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  margin-right: 24px;
+}
+.channel-profile div .channel-edit {
+  width: 144px;
+  height: 38px;
+  background-color: #cc0001;
+  color: white;
+  border: none;
+  display: flex;
+  border-radius: 2px;
+  justify-content: center;
+  align-items: center;
+}
+.channel-profile div .channel-edit:hover {
+  background-color: #e32c2c;
+  box-shadow: 0px 0px 3px #e32c2c;
+}
+
+.channel-list {
+  height: 48px;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+.channel-list div {
+  border: transparent;
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+.channel-list div li {
+  padding: 15px 32px;
+  align-items: center;
+}
+.channel-list div li:hover:not(:last-child) {
+  border-bottom: 2px solid #6a6a6a;
+  margin-bottom: -2px;
+  cursor: printer;
+}
+.channel-list div li:last-child {
+  display: flex;
+}
+.channel-list div li:last-child button {
+  background: none;
+  border: none;
+  margin-right: 15px;
+  border-radius: 9999px;
+  font-size: 16px;
+  color: #6a6a6a;
+  width: 36px;
+  height: 36px;
+}
+.channel-list div li:last-child button:hover {
+  box-shadow: 0px 0px 4px #6a6a6a;
+  cursor: pointer;
+}
+.channel-list div li:last-child form input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid #6a6a6a;
+  height: 32px;
+}
+.channel-list div li:last-child form input:focus {
+  outline: none;
+}
+
+.video-record-box {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video-record-box button {
+  width: 180px;
+  height: 40px;
+  margin-top: 30px;
+}
+
+.video-live-btn {
+  width: 100px;
+  height: 40px;
+  background-color: #cc0001;
+  border: none;
+  border-radius: 2px;
+  color: white;
+}
+.video-live-btn:hover {
+  background-color: #e32c2c;
+  box-shadow: 0px 0px 3px #e32c2c;
 }

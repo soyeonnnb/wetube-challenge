@@ -2,9 +2,8 @@ extends ../base
 include ../mixins/video
 
 block content
-    h1 Home
-    div     
+    div.grid
         each video in videos 
-            +video_big(video)
+            +video(video)
         else 
             span 비디오가 없습니다

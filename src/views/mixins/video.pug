@@ -1,7 +1,16 @@
-mixin video_big(video)
-    a(href=`/videos/${video._id}/watch`)
-        div 
-            p=video.title
-            p=video.owner.channel
-            p=video.createdAt
-    hr
+mixin video(video)
+    div.video-box
+        a(href=`/videos/${video._id}/watch`)
+            video(poster=video.thumbUrl?video.thumbUrl:"" src="/"+video.fileUrl) 
+            div.video-data
+                div.video-data--channel
+                    if video.owner.avatarUrl
+                        img(src="/"+video.owner.avatarUrl)
+                    else 
+                        div
+                            i.fa-solid.fa-user
+                div.video-data--data
+                    span=video.title
+                    span=video.owner.channel
+                    span 조회수 #{video.meta.views}회 
+                        | #{video.createdAt.getFullYear()}.#{video.createdAt.getMonth()+1}.#{video.createdAt.getDate()}

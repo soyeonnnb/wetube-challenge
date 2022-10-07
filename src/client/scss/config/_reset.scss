@@ -127,3 +127,7 @@ a {
   text-decoration: none;
   color: black;
 }
+input[type="text"],
+textarea {
+  outline: none;
+}

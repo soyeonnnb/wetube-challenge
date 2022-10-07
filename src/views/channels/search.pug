@@ -1,10 +1,10 @@
 extends baseC 
 include ../mixins/video
 
-block channelMain
-    h1 Search
-    each video in videos 
-        +video_big(video)
-    else 
-        span 검색 결과가 없습니다.
+block content
+    div.grid
+        each video in videos 
+            +video(video)
+        else 
+            span 검색 결과가 없습니다.
         
