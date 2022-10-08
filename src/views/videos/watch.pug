@@ -2,47 +2,71 @@ extends ../base
 include ../mixins/comment
 
 block content 
-    div(data-id=video._id)#videoContainer
-        video(src="/"+video.fileUrl controls)
-    div 
-        div 
-            each hashtag in video.hashtags
-                span ##{hashtag} 
-        span=video.title    
-        div 
-            if video.owner.avatarUrl
-                img(src="/"+video.owner.avatarUrl width="50px")
-            else 
-                span xxx 
-            a(href=`/channel/${video.owner._id}/featured`) #{video.owner.channel}
-        
-        button#likeBtn(class=like?"like":"dislike")
-            if like 
-                | 💖
-            else 
-                | 🤍
+    div.watch-screen
+        div#videoContainer(data-id=video._id).video-container
+            video(src="/"+video.fileUrl)
+            div#videoControls.videoControls
+                div.videoControls__play
+                    span#play.videoControls__playBtn
+                        i.fas.fa-play
+                    div.videoControls__time
+                        span#currenTime 00:00
+                        span  / 
+                        span#totalTime 00:00
+                input(type="range",step="1", value="0", min="0")#timeline.videoControls__timeline
+                div.videoControls__volume
+                    input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+                    span#mute
+                        i.fas.fa-volume-up
+                div
+                    span#fullScreen
+                        i.fas.fa-expand
+        div.video__data
+            ul.video__hashtags
+                each hashtag in video.hashtags
+                    li ##{hashtag}
+            h2.video__name=video.title
+            div.video__owner
+                a(href="/channel/"+video.owner._id+"/featured")
+                    div.video__owner-avatar
+                        if video.owner.avatarUrl
+                            img(src="/"+video.owner.avatarUrl)
+                        else
+                            i.fa-solid.fa-user
+                    span #{video.owner.username}  
+                if loggedIn && video.owner._id == loggedInUser._id
+                    a(href=`/videos/${video._id}/edit`).edit-video__btn Edit Video
 
-        span 조회수 #{video.meta.views}회 
-        span=video.createdAt
-        span=video.description
-    
+            div
+                button#likeBtn(class=like?"like":"dislike").like-btn
+                    if like 
+                        | 💖
+                    else 
+                        | 🤍
+                span 좋아요    
+            p.video__metadata 조회수 #{video.meta.views}회 
+                | #{video.createdAt.getFullYear()}.#{video.createdAt.getMonth()+1}.#{video.createdAt.getDate()}
+                | #{video.description}
 
-    if loggedIn && video.owner._id == loggedInUser._id
-        a(href=`/videos/${video._id}/edit`) Edit Video
 
-    div 
+
         if loggedIn
-            form#commentForm
-                textarea(name="comment" id="commentFormInput") 
-                input(type="submit" value="댓글")
-    
-    div#commentContainer
-        ul
-            each comment in comments
-                +comment_watch(comment)
+            div.watch-comment-form
+                div.watch-comment-form__avatar
+                    if loggedInUser.avatarUrl
+                        img(src="/"+loggedInUser.avatarUrl)
+                    else
+                        i.fa-solid.fa-user   
+                form#commentForm
+                    input(type="text" name="comment" id="commentFormInput" class="commentFormInput") 
+                    input(type="submit" value="댓글")
 
-            else 
-                span 댓글이 없습니다
+        div#commentContainer
+            ul.commentContainerUl
+                each comment in comments
+                    +comment_watch(comment)
+                else 
+                    span.comment-none 댓글이 없습니다
 
 
 block scripts 

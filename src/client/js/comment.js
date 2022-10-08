@@ -2,9 +2,15 @@ const commentForm = document.getElementById("commentForm");
 const videoContainer = document.getElementById("videoContainer");
 const commentContainer = document.querySelector("#commentContainer ul");
 const deleteBtns = commentContainer.querySelectorAll(".comment__delete");
-const editBtns = commentContainer.querySelectorAll(".comment__edit-submit");
+const commentEditForms = commentContainer.querySelectorAll(".comment__edit");
+const commentEditBtns = document.querySelectorAll(".comment__edit-btn");
 
 const addComment = (text, id) => {
+  const noneComment = commentContainer.querySelector(".comment-none");
+  if (noneComment) {
+    noneComment.remove();
+  }
+  // 너무 복잡하고 req.session 사용 못하면 댓글 내 user 명이나 img를 어떻게 해야할 지 몰라서 지금은 넘김
   const li = document.createElement("li");
   li.dataset.id = id;
   const span = document.createElement("span");
@@ -15,8 +21,8 @@ const addComment = (text, id) => {
 
 const handleCommentCreate = async (event) => {
   event.preventDefault();
-  const textarea = commentForm.querySelector("textarea");
-  const text = textarea.value;
+  const input = commentForm.querySelector(".commentFormInput");
+  const text = input.value;
   const videoId = videoContainer.dataset.id;
   if (text === "") {
     return;
@@ -37,7 +43,7 @@ const handleCommentCreate = async (event) => {
 
 const handleCommentDelete = async (event) => {
   event.preventDefault();
-  const li = event.target.parentElement;
+  const li = event.target.parentElement.parentElement.parentElement;
   const commentId = li.dataset.id;
   const response = await fetch(`/api/comments/${commentId}/delete`, {
     method: "DELETE",
@@ -52,11 +58,10 @@ const handleCommentDelete = async (event) => {
 
 const handleCommentEdit = async (event) => {
   event.preventDefault();
-  const editDiv = event.target.parentElement;
-  const textarea = editDiv.querySelector("textarea");
-  const text = textarea.value;
-  const li = editDiv.parentElement;
-  const commentId = li.dataset.id;
+  const editComment = event.target.parentElement;
+  const input = editComment.querySelector(".commentEditFormInput");
+  const text = input.value;
+  const commentId = editComment.dataset.id;
   const response = await fetch(`/api/comments/${commentId}/edit`, {
     method: "POST",
     headers: {
@@ -65,8 +70,19 @@ const handleCommentEdit = async (event) => {
     body: JSON.stringify({ text }),
   });
   if (response.status === 200) {
-    const span = li.querySelector("span");
+    const span = editComment.querySelector(".comment-text");
     span.innerText = text;
+  }
+};
+const handleShowEditForm = (event) => {
+  event.preventDefault();
+  const li =
+    event.target.parentElement.parentElement.parentElement.parentElement;
+  const form = li.querySelector(".comment__edit");
+  if (form.classList.contains("hidden")) {
+    form.classList.remove("hidden");
+  } else {
+    form.classList.add("hidden");
   }
 };
 
@@ -78,8 +94,14 @@ if (deleteBtns) {
     deleteBtn.addEventListener("click", handleCommentDelete);
   });
 }
-if (editBtns) {
-  [].forEach.call(editBtns, function (editBtn) {
-    editBtn.addEventListener("click", handleCommentEdit);
+if (commentEditForms) {
+  [].forEach.call(commentEditForms, function (editform) {
+    editform.addEventListener("submit", handleCommentEdit);
+  });
+}
+
+if (commentEditBtns) {
+  [].forEach.call(commentEditBtns, function (editbtn) {
+    editbtn.addEventListener("click", handleShowEditForm);
   });
 }

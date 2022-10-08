@@ -1,7 +1,19 @@
 extends baseC
 
 block content
-    h1 About
-    p #{user.email}
-    p #{user.description}
-    p #{user.createdAt}
+    div.channel-about
+        div
+            div
+                if user.description
+                    h3 설명
+                    p #{user.description}
+                    hr
+                h3 세부정보
+                span 비지니스 문의: #{user.email}
+            div
+                h3 통계
+                hr
+                span 가입일: #{user.createdAt.getFullYear()}.#{user.createdAt.getMonth()+1}.#{user.createdAt.getDate()}
+                hr
+                span 조회수 #{views}회
+                

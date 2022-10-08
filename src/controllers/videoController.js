@@ -16,9 +16,11 @@ export const watch = async (req, res) => {
   if (!video) {
     return res.render("404");
   }
-  const comments = await Comment.find({ video: video._id }).sort({
-    createdAt: -1,
-  });
+  const comments = await Comment.find({ video: video._id })
+    .sort({
+      createdAt: -1,
+    })
+    .populate("owner");
   if (req.session.loggedIn) {
     like = await Like.findOne({
       user: req.session.loggedInUser._id,

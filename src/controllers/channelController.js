@@ -32,9 +32,15 @@ export const about = async (req, res) => {
   if (!user) {
     return res.status(404).redirect("/");
   }
+  let views = 0;
+  const videos = await Video.find({ owner: user });
+  if (videos) {
+    videos.forEach((video) => (views = views + video.meta.views));
+  }
   return res.status(200).render("channels/about", {
     pageTitle: "channelAbout",
     user,
+    views,
   });
 };
 

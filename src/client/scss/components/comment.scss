@@ -1,0 +1,86 @@
+.commentContainerUl {
+  li {
+    width: 900px;
+    margin-top: 20px;
+    .watch-comment-box {
+      display: flex;
+      justify-content: space-between;
+      .watch-comment {
+        display: flex;
+        width: 80%;
+
+        .watch-comment__avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 9999px;
+          background-color: $user-i;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 20px;
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 9999px;
+          }
+        }
+        .watch-comment__data {
+          display: flex;
+          flex-direction: column;
+          span:first-child {
+            margin-bottom: 10px;
+          }
+        }
+      }
+      .watch-comment-owner {
+        button {
+          color: white;
+          border: none;
+          border-radius: 2px;
+          padding: 6px 10px;
+          margin-left: 5px;
+        }
+        .comment__delete {
+          background-color: $btn-red;
+          &:hover {
+            background-color: $btn-red-hover;
+            box-shadow: $btn-red-hover-shadow;
+          }
+        }
+        .comment__edit-btn {
+          background-color: $btn-blue;
+          &:hover {
+            background-color: $btn-blue-hover;
+            box-shadow: $btn-blue-hover-shadow;
+          }
+        }
+      }
+    }
+  }
+  form {
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    margin-top: 30px;
+    &.hidden {
+      display: none;
+    }
+    input[type="text"] {
+      width: 600px;
+      padding: 7px 16px;
+      margin: 0 16px;
+    }
+    input[type="submit"] {
+      width: 72px;
+      height: 38px;
+      background-color: $btn-blue;
+      border: none;
+      color: white;
+      border-radius: 2px;
+      &:hover {
+        background-color: $btn-blue-hover;
+        box-shadow: $btn-blue-hover-shadow;
+      }
+    }
+  }
+}

@@ -7,8 +7,13 @@
 @import "./components/toggle.scss";
 @import "./components/video.scss";
 @import "./components/form.scss";
+@import "./components/videoRecorder.scss";
+@import "./components/comment.scss";
+@import "./components/footer.scss";
 
 // Screens
 @import "./screens/home.scss";
 @import "./screens/channelBase.scss";
 @import "./screens/upload.scss";
+@import "./screens/watch.scss";
+@import "./screens/channelAbout.scss";

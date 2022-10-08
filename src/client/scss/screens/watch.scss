@@ -1,0 +1,136 @@
+.watch-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.video__data {
+  margin: 20px 0 50px 0;
+  display: flex;
+  flex-direction: column;
+  width: 956px;
+}
+.video__name {
+  font-size: 20px;
+  max-width: 800px;
+  width: 80%;
+  font-weight: 900;
+  text-align: left;
+}
+.video__hashtags {
+  display: flex;
+  font-size: 13px;
+  color: $blue;
+  margin-bottom: 5px;
+  li {
+    margin-right: 4px;
+  }
+}
+
+.video__owner {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  .video__owner-avatar {
+    background-color: coral;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+    }
+    i {
+      font-size: 20px;
+      color: white;
+    }
+  }
+  a:first-child {
+    display: flex;
+    align-items: center;
+  }
+  .edit-video__btn {
+    background-color: $btn-blue;
+    color: white;
+    margin: 10px 20px;
+    padding: 4px 8px;
+    display: inline-block;
+    &:hover {
+      background-color: $btn-blue-hover;
+      box-shadow: $btn-blue-hover-shadow;
+    }
+  }
+}
+
+.video__comments {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+  .video__comment {
+    padding: 10px;
+    border-radius: 9999px;
+    color: black;
+    border: 1px solid black;
+    margin-bottom: 10px;
+  }
+}
+.like-btn {
+  background-color: #f9f9f9;
+  border: none;
+  width: 30px;
+  height: 30px;
+  margin: 20px 0;
+}
+.watch-comment-form {
+  display: flex;
+  width: 958px;
+  align-items: center;
+  .watch-comment-form__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    background-color: $user-i;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+    }
+  }
+  form {
+    display: flex;
+    align-items: center;
+    input[type="text"] {
+      width: 600px;
+      padding: 7px 16px;
+      margin: 0 16px;
+    }
+    input[type="submit"] {
+      width: 72px;
+      height: 38px;
+      background-color: $btn-blue;
+      border: none;
+      color: white;
+      border-radius: 2px;
+      &:hover {
+        background-color: $btn-blue-hover;
+        box-shadow: $btn-blue-hover-shadow;
+      }
+    }
+  }
+}
+.comment-none {
+  display: inline-block;
+  margin-top: 50px;
+}

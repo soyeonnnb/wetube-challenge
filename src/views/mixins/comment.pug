@@ -1,13 +1,24 @@
 mixin comment_watch(comment)
     li(data-id=comment.id)
-        span=comment.text 
-        button.comment__delete ❌
-        button.comment__edit-btn ✏
-        div.comment__edit
-            textarea
-                | #{comment.text}
-            button.comment__edit-submit 수정
-        hr
+        div.watch-comment-box
+            div.watch-comment
+                div.watch-comment__avatar
+                    if comment.owner.avatarUrl
+                        img(src="/"+comment.owner.avatarUrl)
+                    else
+                        i.fa-solid.fa-user
+                div.watch-comment__data  
+                    span #{comment.owner.channel} | #{comment.createdAt.getFullYear()}.#{comment.createdAt.getMonth()+1}.#{comment.createdAt.getDate()}
+                    span.comment-text=comment.text  
+            if loggedInUser._id == comment.owner._id 
+                div.watch-comment-owner
+                    button.comment__delete 삭제
+                    button.comment__edit-btn 수정
+        if loggedInUser._id == comment.owner._id
+            form.comment__edit.hidden
+                input(type="text" name="comment-edit" class="commentEditFormInput" value=comment.text)
+                input(type="submit" value="수정" class="comment__edit-submit")
+
 
 mixin comment_view(comment)
     li(data-id=comment._id)

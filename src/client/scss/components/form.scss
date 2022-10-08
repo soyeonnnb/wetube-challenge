@@ -91,6 +91,9 @@
         }
         &.naver {
           background-color: #5bbc39;
+          a {
+            color: white;
+          }
         }
       }
     }
@@ -112,10 +115,18 @@
         align-items: center;
         color: white;
         &:first-child {
-          background-color: $blue;
+          background-color: $btn-blue;
+          &:hover {
+            background-color: $btn-blue-hover;
+            box-shadow: $btn-blue-hover-shadow;
+          }
         }
         &:last-child {
           background-color: $btn-red;
+          &:hover {
+            background-color: $btn-red-hover;
+            box-shadow: $btn-red-hover-shadow;
+          }
         }
       }
     }

@@ -1,0 +1,25 @@
+.channel-about {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  & > div {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    font-size: 15px;
+    hr {
+      width: 70%;
+      margin-left: 0;
+      border: 0;
+      background-color: $dark-gray;
+      height: 1px;
+      margin: 13px 0;
+    }
+    h3 {
+      margin-bottom: 13px;
+    }
+    span {
+      font-size: 13px;
+    }
+  }
+}
