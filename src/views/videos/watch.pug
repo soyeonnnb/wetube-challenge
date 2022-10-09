@@ -4,7 +4,7 @@ include ../mixins/comment
 block content 
     div.watch-screen
         div#videoContainer(data-id=video._id).video-container
-            video(src="/"+video.fileUrl)
+            video(src=video.fileUrl)
             div#videoControls.videoControls
                 div.videoControls__play
                     span#play.videoControls__playBtn
@@ -30,10 +30,7 @@ block content
                 a(href="/channel/"+video.owner._id+"/featured")
                     div.video__owner-avatar
                         if video.owner.avatarUrl
-                            if video.owner.socialLogin
-                                img(src=video.owner.avatarUrl)
-                            else 
-                                img(src="/"+video.owner.avatarUrl)
+                            img(src=video.owner.avatarUrl)
                         else
                             i.fa-solid.fa-user
                     span #{video.owner.username}  
@@ -57,10 +54,7 @@ block content
             div.watch-comment-form
                 div.watch-comment-form__avatar
                     if loggedInUser.avatarUrl
-                        if loggedInUser.socialLogin
-                            img(src=loggedInUser.avatarUrl)
-                        else 
-                            img(src="/"+loggedInUser.avatarUrl)
+                        img(src=loggedInUser.avatarUrl)
                     else
                         i.fa-solid.fa-user   
                 form#commentForm

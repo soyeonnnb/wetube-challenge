@@ -2,15 +2,12 @@ extends ../base
 
 block channelBase
     if user.bannerUrl 
-        img(src="/"+user.bannerUrl).banner
+        img(src=user.bannerUrl).banner
     div.channel-profile
         div
             div
                 if user.avatarUrl
-                    if user.socialLogin
-                        img(src=user.avatarUrl width="250px").channel-avatar
-                    else
-                        img(src="/"+user.avatarUrl width="250px").channel-avatar
+                    img(src=user.avatarUrl width="250px").channel-avatar
                 span #{user.channel}
             if loggedIn && loggedInUser._id === user.id
                 a(href="/users/edit").channel-edit 

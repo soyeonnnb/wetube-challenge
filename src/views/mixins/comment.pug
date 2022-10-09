@@ -4,10 +4,7 @@ mixin comment_watch(comment)
             div.watch-comment
                 div.watch-comment__avatar
                     if comment.owner.avatarUrl
-                        if comment.owner.socialLogin
-                            img(src=comment.owner.avatarUrl)
-                        else
-                            img(src="/"+comment.owner.avatarUrl)
+                        img(src=comment.owner.avatarUrl)
                     else
                         i.fa-solid.fa-user
                 div.watch-comment__data  

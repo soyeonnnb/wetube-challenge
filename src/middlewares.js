@@ -1,4 +1,7 @@
 import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
+
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = req.session.loggedIn;
   res.locals.loggedInUser = req.session.loggedInUser;
@@ -20,6 +23,38 @@ export const loggedInUserOnly = (req, res, next) => {
   }
 };
 
+const s3 = new aws.S3({
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
+  },
+});
+
+const multerUserUploader = multerS3({
+  s3: s3,
+  bucket: "wetube-challenge22",
+  key: function (req, file, cb) {
+    if (file.fieldname === "avatar") {
+      cb(null, `uploads/users/avatars/${Date.now()}-${file.originalname}`);
+    } else if (file.fieldname === "banner") {
+      cb(null, `uploads/users/banners/${Date.now()}-${file.originalname}`);
+    }
+  },
+  acl: "public-read",
+});
+const multerVideoUploader = multerS3({
+  s3: s3,
+  bucket: "wetube-challenge22",
+  key: function (req, file, cb) {
+    if (file.fieldname === "video") {
+      cb(null, `uploads/videos/files/${Date.now()}-${file.originalname}`);
+    } else if (file.fieldname === "thumb") {
+      cb(null, `uploads/videos/thumbs/${Date.now()}-${file.originalname}`);
+    }
+  },
+  acl: "public-read",
+});
+
 // user fileupload
 const userFileFilter = (req, file, cb) => {
   const typeArray = file.mimetype.split("/");
@@ -37,18 +72,9 @@ const userFileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-const userStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    if (file.fieldname === "avatar") {
-      cb(null, "uploads/users/avatars/");
-    } else if (file.fieldname === "banner") {
-      cb(null, "uploads/users/banners/");
-    }
-  },
-});
 
 export const userUpload = multer({
-  storage: userStorage,
+  storage: multerUserUploader,
   fileFilter: userFileFilter,
 });
 
@@ -89,6 +115,20 @@ const videoFileFilter = (req, file, cb) => {
   }
 };
 
+export const videoUpload = multer({
+  storage: multerVideoUploader,
+  fileFilter: videoFileFilter,
+});
+/*
+const userStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    if (file.fieldname === "avatar") {
+      cb(null, "uploads/users/avatars/");
+    } else if (file.fieldname === "banner") {
+      cb(null, "uploads/users/banners/");
+    }
+  },
+});
 const videoStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === "video") {
@@ -98,8 +138,4 @@ const videoStorage = multer.diskStorage({
     }
   },
 });
-
-export const videoUpload = multer({
-  storage: videoStorage,
-  fileFilter: videoFileFilter,
-});
+*/
