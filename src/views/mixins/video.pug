@@ -5,7 +5,11 @@ mixin video(video)
             div.video-data
                 div.video-data--channel
                     if video.owner.avatarUrl
-                        img(src="/"+video.owner.avatarUrl)
+                        if video.owner.socialLogin
+                            img(src=video.owner.avatarUrl)
+                        else 
+                            img(src="/"+video.owner.avatarUrl)
+
                     else 
                         div
                             i.fa-solid.fa-user
