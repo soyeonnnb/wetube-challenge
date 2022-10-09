@@ -6,8 +6,11 @@ block channelBase
     div.channel-profile
         div
             div
-                if user.avatarUrl 
-                    img(src="/"+user.avatarUrl width="250px").channel-avatar
+                if user.avatarUrl
+                    if user.socialLogin
+                        img(src=user.avatarUrl width="250px").channel-avatar
+                    else
+                        img(src="/"+user.avatarUrl width="250px").channel-avatar
                 span #{user.channel}
             if loggedIn && loggedInUser._id === user.id
                 a(href="/users/edit").channel-edit 
