@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev:server": "nodemon",
-    "dev:assets": "webpack"
+    "dev:assets": "webpack --mode=development -w",
+    "build": "npm run build:server && npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets": "webpack --mode=production",
+    "start": "node build/init.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +36,7 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.3",
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.3",

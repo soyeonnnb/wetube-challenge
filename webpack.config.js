@@ -11,8 +11,8 @@ module.exports = {
     videoPlayer: BASE_JS + "videoPlayer.js",
     like: BASE_JS + "like.js",
   },
-  mode: "development",
-  watch: true,
+  // mode도 따로 cammand에서 보내줌
+  // watch: true, -> watch는 development에서만 사용해야 하므로, 배포할 땐 삭제 -> development command에 따로추가
   plugins: [
     new MiniCssExtractPlugin({
       filename: "css/styles.css",
