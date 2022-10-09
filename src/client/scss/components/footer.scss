@@ -13,4 +13,13 @@ footer {
     height: 1px;
     box-shadow: 0 0 2px $dark-gray;
   }
+  & > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    a:hover {
+      text-shadow: 0px 0px 3px #d29be1;
+    }
+  }
 }
