@@ -59,7 +59,7 @@
       margin: 30px 0;
     }
     .social-login {
-      li {
+      a {
         width: 366px;
         height: 50px;
         border-radius: 2px;
@@ -79,7 +79,7 @@
         }
         &.github {
           background-color: #2f2f2f;
-          a {
+          span {
             color: white;
           }
         }
@@ -91,7 +91,7 @@
         }
         &.naver {
           background-color: #5bbc39;
-          a {
+          span {
             color: white;
           }
         }
